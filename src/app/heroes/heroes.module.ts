@@ -9,6 +9,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeroesListComponent } from './pages/heroes-list/heroes-list.component';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { HeroCardComponent } from './components/hero-card/hero-card.component';
+import { ImagenPipe } from './pipes/imagen.pipe';
+
 
 
 
@@ -18,7 +21,9 @@ import { MaterialModule } from '../material/material.module';
     SearchComponent,
     HeroComponent,
     HomeComponent,
-    HeroesListComponent
+    HeroesListComponent,
+    HeroCardComponent,
+    ImagenPipe
   ],
   imports: [
     CommonModule,
