@@ -28,11 +28,18 @@ export class AddComponent implements OnInit {
   constructor(private heroesService:HeroesService, private activatedRoute:ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
+
+    if(!this.router.url.includes('edit'))
+      return;
+
+
     this.activatedRoute.params
     .pipe(
       switchMap(({id})=>this.heroesService.getHero(id))
     )
     .subscribe(hero=>this.hero=hero);
+
+
   }
 
   saveHero(){
