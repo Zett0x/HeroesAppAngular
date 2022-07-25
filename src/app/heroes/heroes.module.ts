@@ -12,7 +12,7 @@ import { MaterialModule } from '../material/material.module';
 import { HeroCardComponent } from './components/hero-card/hero-card.component';
 import { ImagenPipe } from './pipes/imagen.pipe';
 import { FormsModule } from '@angular/forms';
-
+import { TitlePipe } from './pages/add/title.pipe';
 
 
 
@@ -24,14 +24,16 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     HeroesListComponent,
     HeroCardComponent,
-    ImagenPipe
+    ImagenPipe,
+    TitlePipe
   ],
   imports: [
     CommonModule,
     FlexLayoutModule,
     HeroesRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+
   ]
 })
 export class HeroesModule { }

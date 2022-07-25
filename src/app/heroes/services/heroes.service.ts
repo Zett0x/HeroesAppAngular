@@ -25,4 +25,16 @@ export class HeroesService {
   getSuggestions(termino:string):Observable<Hero[]>{
     return this.http.get<Hero[]>(`${this.API_URL}/heroes?q=${termino}&_limit=6`);
   }
+
+  addHero(hero:Hero):Observable<Hero>{
+
+    return this.http.post<Hero>(`${this.API_URL}/heroes`,hero);
+
+  }
+  updateHero(hero:Hero):Observable<Hero>{
+
+    return this.http.put<Hero>(`${this.API_URL}/heroes/${hero.id}`,hero);
+
+  }
+
 }
