@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { Hero, Publisher } from '../../interfaces/heroes.interfaces';
@@ -25,7 +26,13 @@ export class AddComponent implements OnInit {
     Publisher.MarvelComics
   ]
 
-  constructor(private heroesService:HeroesService, private activatedRoute:ActivatedRoute, private router:Router) { }
+  constructor(
+    private heroesService:HeroesService,
+    private activatedRoute:ActivatedRoute,
+    private router:Router,
+    private snackBar:MatSnackBar
+    )
+    {}
 
   ngOnInit(): void {
 
@@ -47,11 +54,12 @@ export class AddComponent implements OnInit {
     if(this.hero.id){
       //actualizar
       this.heroesService.updateHero(this.hero)
-      .subscribe(hero=>console.log('updating...',hero));
+      .subscribe(hero=>this._showSnackbar('Registro actualizado'));
     }else{
       //crear
           this.heroesService.addHero(this.hero)
         .subscribe(hero=>{
+          this._showSnackbar('Registro creado!')
           this.router.navigate(['/heroes/edit',hero.id]);
         })
 
@@ -64,9 +72,17 @@ export class AddComponent implements OnInit {
       if(this.hero.superhero.trim().length===0) return;
       if(this.hero.id){
         this.heroesService.deleteHero(this.hero.id)
-        .subscribe(resp=>this.router.navigate(['/heroes/list']));
+        .subscribe(resp=>{
+          this._showSnackbar('Registro eliminado!')
+          this.router.navigate(['/heroes/list'])});
 
       }
     }
+
+  private _showSnackbar(message:string){
+    this.snackBar.open(message,'ok!',{
+      duration:2500
+    });
+  }
 
 }
