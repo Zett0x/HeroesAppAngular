@@ -21,4 +21,8 @@ export class HeroesService {
   getHero(id:string):Observable<Hero>{
     return this.http.get<Hero>(`${this.API_URL}/heroes/${id}`);
   }
+
+  getSuggestions(termino:string):Observable<Hero[]>{
+    return this.http.get<Hero[]>(`${this.API_URL}/heroes?q=${termino}&_limit=6`);
+  }
 }
