@@ -57,8 +57,16 @@ export class AddComponent implements OnInit {
 
     }
 
-
-
-
   }
+
+    deleteHero(){
+      console.log('called')
+      if(this.hero.superhero.trim().length===0) return;
+      if(this.hero.id){
+        this.heroesService.deleteHero(this.hero.id)
+        .subscribe(resp=>this.router.navigate(['/heroes/list']));
+
+      }
+    }
+
 }

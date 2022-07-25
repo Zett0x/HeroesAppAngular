@@ -37,4 +37,10 @@ export class HeroesService {
 
   }
 
+  deleteHero(id:string):Observable<any>{
+
+    return this.http.delete(`${this.API_URL}/heroes/${id}`);
+
+  }
+
 }

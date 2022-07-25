@@ -81,13 +81,28 @@ fxLayoutGap="40px">
       />
     </mat-form-field>
     <br/>
-    <button mat-raised-button
+
+    <div fxLayout>
+      <button mat-raised-button
     color="primary"
     (click)="saveHero()"
     >
       <mat-icon>edit</mat-icon>
       Guardar
     </button>
+    <span class="spacer"></span>
+
+    <button *ngIf="hero.id" mat-raised-button color="warn"
+    (click)="deleteHero()"
+    >
+
+      <mat-icon>remove</mat-icon>
+      Borrar</button>
+
+    </div>
+
+
+
   </div>
   <div fxFlex="50">
     <img [src]="hero | imagen"/>
