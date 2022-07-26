@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { ConfirmComponent } from '../../components/confirm/confirm.component';
 import { Hero, Publisher } from '../../interfaces/heroes.interfaces';
 import { HeroesService } from '../../services/heroes.service';
 
@@ -30,7 +32,8 @@ export class AddComponent implements OnInit {
     private heroesService:HeroesService,
     private activatedRoute:ActivatedRoute,
     private router:Router,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private dialog:MatDialog
     )
     {}
 
@@ -68,15 +71,32 @@ export class AddComponent implements OnInit {
   }
 
     deleteHero(){
-      console.log('called')
-      if(this.hero.superhero.trim().length===0) return;
+
+      const dialog=this.dialog.open(ConfirmComponent, {
+        width:'250px',
+        data: {...this.hero}
+      });
+
+      dialog.afterClosed().subscribe((result)=>{
+       if(result){
+        this.heroesService.deleteHero(this.hero.id!)
+        .subscribe(resp=>{
+          this._showSnackbar('Registro eliminado!')
+          this.router.navigate(['/heroes/list'])});
+
+       }
+      })
+
+
+
+      /* if(this.hero.superhero.trim().length===0) return;
       if(this.hero.id){
         this.heroesService.deleteHero(this.hero.id)
         .subscribe(resp=>{
           this._showSnackbar('Registro eliminado!')
           this.router.navigate(['/heroes/list'])});
 
-      }
+      } */
     }
 
   private _showSnackbar(message:string){

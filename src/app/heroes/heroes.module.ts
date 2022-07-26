@@ -12,7 +12,7 @@ import { MaterialModule } from '../material/material.module';
 import { HeroCardComponent } from './components/hero-card/hero-card.component';
 import { ImagenPipe } from './pipes/imagen.pipe';
 import { FormsModule } from '@angular/forms';
-import { TitlePipe } from './pages/add/title.pipe';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 
 
 
@@ -25,7 +25,7 @@ import { TitlePipe } from './pages/add/title.pipe';
     HeroesListComponent,
     HeroCardComponent,
     ImagenPipe,
-    TitlePipe
+    ConfirmComponent
   ],
   imports: [
     CommonModule,
